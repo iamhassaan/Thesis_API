@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}Load Crimes{% endblock %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+            <h1>Recommendation System Distributed </h1>
+        </div>
+        <div class="col-md-12 text-center">
+            <p>Here you will be able to load crimes for a specific month.</p>
+        </div>
+    </div>
+    <main class="login-form">
+        <div class="cotainer">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">|Please Enter the Following Data</div>
+                        <div class="card-body">
+                            <form method="post">
+                                <div class="form-group row">
+                                    <label for="batchSize" class="col-md-4 col-form-label text-md-right">Batch Size</label>
+                                    <div class="col-md-6">
+                                      <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+
+                                          <label class="input-group-text" for="batchSize">Options</label>
+                                        </div>
+                                        <select class="custom-select" id="batchSize" name="batchSize">
+                                          <option>Choose...</option>
+                                          {% for i in data2['drop']['BATCH_SIZE'] %}
+                                          <option id='{{data2[batchSize]}}' {% if i == data2[batchSize] %} selected {% endif %}>{{i}}</option>
+                                          {% endfor %}
+
+                                        </select>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="latency" class="col-md-4 col-form-label text-md-right">Latency</label>
+                                    <div class="col-md-6">
+                                      <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <label class="input-group-text" for="latency">Options</label>
+                                        </div>
+                                        <select class="custom-select" id="latency" name="latency">
+                                          {% if data2['latency']%}
+                                            <option>Choose...</option>
+                                            {% for i in data2['drop']['LATENCY'] %}
+                                            {% if i == data2[latency] %} <option  id='{{data2[latency]}}' selected>{{i}}</option>
+                                            {% else %} <option  id='{{i}}'>{{i}}</option>{% endif %}
+                                            {% endfor %}
+                                          {% else %}
+                                            <option>Choose...</option>
+                                            {% for i in data2['drop']['LATENCY'] %}
+                                                <option  id='{{i}}' >{{i}}</option>
+                                            {% endfor %}
+                                          {% endif %}
+
+                                        </select>
+                                      </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                {% if data2['value'] %}
+                                <div class="form-group row">
+                                    <label for="recom" class="col-md-4 col-form-label text-md-right">Machines</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="recom" class="form-control" name="recom" value="{{data2['value']}}" required disabled>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Load
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
