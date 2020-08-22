@@ -3,4 +3,4 @@ Flask
 requests
 sqlalchemy
 passlib
-
+uwsgi
