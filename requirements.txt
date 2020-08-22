@@ -3,5 +3,4 @@ Flask
 requests
 sqlalchemy
 passlib
-uwsgi
-psycopg2
+
